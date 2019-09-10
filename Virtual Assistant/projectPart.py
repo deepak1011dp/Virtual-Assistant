@@ -108,8 +108,7 @@ def launch(word):
                 pass
             subprocess.Popen(user_input)
         else:
-            pass
-    
+            pass  
 
 def brightness(word):
     word1 = word.split(' ')
@@ -186,8 +185,7 @@ def gesture_control():
         #print(cnt)
         for i in range(0,len(cnt)):
                 area=cv2.contourArea(cnt[i])
-                A.append(area)
-                
+                A.append(area)              
         if(len(cnt)>0):
             amax=max(A)
             #print(amax)
@@ -222,7 +220,6 @@ def gesture_control():
     v.release()
 
 #open notepad and start typing by voice command
-
 def keyboard():
     word = myCommand()
     print(word)
@@ -245,8 +242,7 @@ def keyboard():
         k.release(Key.space)
     elif word =='backspace':
         k.press(Key.backspace)
-        k.release(Key.backspace)
-        
+        k.release(Key.backspace)        
     else:
         k.type(word)
 #ghostResponse('Start Typing')
@@ -309,14 +305,12 @@ def conversation():
             d = ['I am Ghost','I am your Virtual Assistant']
             d = d[random.randint(0,len(d)-1)]
             ghostResponse(d)
-
         elif "wikipedia" in word:
             txt_to_speech("what you want to search on wikipedia")
             se = myCommand()
             d=wikipedia.summary(se, sentences=2)
             print("Ghost :" , d)
             ghostResponse(d)
-        
         elif "weather" in  word or "temperature" in  word:
             weather()
         elif "search from google" in word or "google for me" in word:
@@ -325,22 +319,20 @@ def conversation():
             word2 = myCommand()
             for d in search(word2, tld="co.in", num=10, stop=10, pause=2):
                 print(d)
-                ghostResponse(d)
-                
+                ghostResponse(d)                
         elif "thank you" in  word or "thanks" in  word:
             d = "You're welcome Sir. I am just doing my job"
             print("Ghost : ",d)
-            ghostResponse(d)    
-            
+            ghostResponse(d)                
         elif 'bye' in word or 'good bye' in word:
-            flag = 0
-        
+            flag = 0        
         else:
             d = ['I am not trained for this','I do not understand','sorry, I dont know']
             d = d[random.randint(0,len(d)-1)]
             ghostResponse(d)
-
- 
-conversation()
-              
-        
+def mainfunc():
+    try: 
+        conversation()
+    except:
+        mainfunc()             
+mainfunc()     
